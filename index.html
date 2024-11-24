@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Awareness Platform</title>
+    <link rel="stylesheet" href="assets/styles/cyberstyles.css">
+    
+    <script>
+        async function handleFormSubmit(event, action) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+
+            try {
+                const response = await fetch(action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.text();
+                document.getElementById('result').innerHTML = result;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = 'An error occurred.';
+            }
+        }
+
+        function switchToRegister() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        function switchToLogin() {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        async function loadTweets() {
+            try {
+                const response = await fetch('http://localhost:3000/tweets');
+                const tweets = await response.json();
+                
+                const tweetsContainer = document.getElementById('tweets');
+                tweetsContainer.innerHTML = ''; // Clear previous tweets
+
+                tweets.forEach(tweet => {
+                    const tweetElement = document.createElement('div');
+                    tweetElement.className = 'tweet';
+                    tweetElement.textContent = tweet.text;
+                    tweetsContainer.appendChild(tweetElement);
+                });
+            } catch (error) {
+                console.error('Error loading tweets:', error);
+            }
+        }
+
+        async function loadNews() {
+            try {
+                const response = await fetch('https://newsapi.org/v2/everything?q=cybersecurity&apiKey=6917766bcd7a4f69851da8d6691e7e95');
+                const data = await response.json();
+                
+                const newsContainer = document.getElementById('news-articles');
+                newsContainer.innerHTML = ''; // Clear previous news articles
+
+                data.articles.forEach(article => {
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'news-article';
+                    articleElement.innerHTML = `
+                        <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+                        <p>${article.description}</p>
+                    `;
+                    newsContainer.appendChild(articleElement);
+                });
+            } catch (error) {
+                console.error('Error loading news:', error);
+            }
+        }
+
+        // Load tweets and news on page load
+        window.onload = function() {
+            loadTweets();
+            loadNews();
+        };
+    </script>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/66beb1990cca4f8a7a768f7c/1i5cebg1g';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+</head>
+<body>
+    <header>
+        <h1>Cybersecurity Awareness and Education</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tutorials">Tutorials</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#quizzes">Quizzes</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#news">News</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+        <p>Don't have an account? <a href="register.html" onclick="switchToRegister()">Register</a></p>
+    </div>
+
+    <!-- Register Form -->
+    
+        <p>Already have an account? <a href="login.html" onclick="switchToLogin()">Login</a></p>
+    </div>
+
+    <section id="home" class="content-section">
+        <h2>Welcome to Cybersecurity Education</h2>
+        <p>Learn how to protect yourself and your business from cyber threats.</p>
+    </section>
+
+    <section id="tutorials" class="content-section">
+        <h2>Tutorials</h2>
+        <div class="card">
+            <h3>Understanding Phishing Attacks</h3>
+            <p>Learn how to identify and avoid phishing scams.</p>
+            <a href="tutorials/phishing.html" class="button">Read More</a>
+        </div>
+        <div class="card">
+            <h3>Secure Passwords</h3>
+            <p>Best practices for creating and managing secure passwords.</p>
+            <a href="tutorials/passwords.html" class="button">Read More</a>
+        </div>
+    </section>
+
+    <section id="videos" class="content-section">
+        <h2>Educational Videos</h2>
+        <div class="card">
+            <h3>Video 1: Introduction to Cybersecurity</h3>
+            <p>A beginner's guide to the basics of cybersecurity.</p>
+            <a href="videos/introduction.html" class="button">Watch Now</a>
+        </div>
+        <div class="card">
+            <h3>Video 2: Advanced Threat Protection</h3>
+            <p>Techniques and tools for protecting against advanced threats.</p>
+            <a href="videos/advanced.html" class="button">Watch Now</a>
+        </div>
+    </section>
+
+    <section id="quizzes" class="content-section">
+        <h2>Quizzes</h2>
+        <div class="card">
+            <h3>Phishing Quiz</h3>
+            <p>Test your knowledge about phishing attacks.</p>
+            <a href="quizzes/phishing.html" class="button">Start Quiz</a>
+        </div>
+        <div class="card">
+            <h3>Password Security Quiz</h3>
+            <p>How well do you understand password security?</p>
+            <a href="quizzes/passwords.html" class="button">Start Quiz</a>
+        </div>
+    </section>
+
+    <section id="courses" class="content-section">
+        <h2>Courses</h2>
+        <div class="card">
+            <h3>Cybersecurity Fundamentals</h3>
+            <p>An introductory course on the basics of cybersecurity.</p>
+            <a href="courses/fundamentals.html" class="button">Enroll</a>
+        </div>
+        <div class="card">
+            <h3>Advanced Cyber Defense</h3>
+            <p>In-depth training on defending against sophisticated attacks.</p>
+            <a href="courses/defense.html" class="button">Enroll</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>Our mission is to provide top-notch cybersecurity education and resources to help individuals and organizations stay safe online.</p>
+        <img src="assets/images/about.jpg" alt="About Us">
+    </section>
+
+
+
+    <section id="news" class="content-section">
+        <h2>Latest Cybersecurity News</h2>
+        <div id="news-articles"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cybersecurity Awareness Platform</p>
+    </footer>
+</body>
+</html>
